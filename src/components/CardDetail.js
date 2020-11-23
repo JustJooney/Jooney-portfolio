@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
+import {motion} from 'framer-motion';
 
 function CardDetail({data, isClick, setIsClick}){
 
@@ -19,17 +20,20 @@ function CardDetail({data, isClick, setIsClick}){
 		<>
 			{!isClick && 
 				<StyledCardDetail className='shadow' onClick={exitDetailHandler}>
-					<Detail>
+					<Detail >
 						<DetailNav>
 							<h1>{data.name}</h1>
 							<ul>
-								<li><a href={data.url} rel='website' target="_blank" rel="noreferrer">Website</a></li>
-								<li><a href={data.gitHub} rel='github' target="_blank" rel="noreferrer">Github</a></li>
+								<li><a href={data.url} target="_blank" rel="noreferrer">Website</a></li>
+								<li><a href={data.gitHub} target="_blank" rel="noreferrer">Github</a></li>
 							</ul>
 						</DetailNav>
-						<Code>{data.code.map((code) => <span key={code}>{code}</span>)}</Code>
+						<Code>
+							<p>Programs used:</p>
+							{data.code.map((code) => <span key={code}>{code}</span>)}
+						</Code>
 						<DetailDescription>
-							<a href={data.url} target="_blank" rel="noreferrer"><img src={data.gif}  alt={data.name} /></a>
+							<a href={data.url} target="_blank" rel="noreferrer"><motion.img  src={data.gif}  alt={data.name} /></a>
 							<div>
 								<section>
 									<h3>Objective</h3>
@@ -56,38 +60,45 @@ function CardDetail({data, isClick, setIsClick}){
 	)
 }
 
-const StyledCardDetail = styled.div`
+const StyledCardDetail = styled(motion.div)`
 	width: 100%;
-	min-height: 100vh;
-	overflow-y: scroll;
+	height: 100vh;
 	background: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 5;
+	z-index: 20;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 `
 
-const Detail = styled.div`
+const Detail = styled(motion.div)`
 	width: 80%;
-	height: 80%;
 	z-index: 10;
+	height: 90%;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	position: fixed;
 	background: #374785;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: stretch;
+	@media(max-width: 768px){
+		display: block;
+	}
 `
 
-const DetailNav = styled.div`
+const DetailNav = styled(motion.div)`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.5rem 2rem;
+	@media(max-width: 768px){
+		flex-direction: column;
+		justify-content: center;
+	}
 	h1{
 		font-size: 3rem;
 		padding: 1rem 1rem;
@@ -122,30 +133,54 @@ const DetailNav = styled.div`
 				font-family: "Raleway", sanserif;
 				transition: 500ms;
 			}
+		}	
+	}
+	@media(max-width: 768px){
+		ul{
+			margin: 1rem 0rem;
+			li{
+				margin:0rem 1rem;
+			}
+		}
+	}
+	@media(max-width: 425px){
+		ul{
+			flex-direction: column;
+			li{
+				margin: 1rem 0rem;
+			}
 		}
 	}
 `
 
 const Code = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
 	padding: 0rem 2rem;
 	margin-bottom: 2rem;
+
+	font-size: 1.3rem;
+	p{
+		margin-bottom: 1rem;
+	}
 	span{
-		padding: 1rem;
-		margin: 0rem 1rem;
-		border-radius: 2rem;
-		background-color: #a8d1e7;
+		padding: 1rem 0.5rem;
+	}
+	@media(max-width: 425px){
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 `
 
-const DetailDescription = styled.div`
+const DetailDescription = styled(motion.div)`
 	padding: 2rem;
 	div{
 		section{
 			width: 100%;
 		}
+		@media(max-width: 1464px){
+			margin-top: 2rem;
+		}	
 		h3{
 			font-family: "Raleway", sanserif;
 			font-size: 1.5rem;
@@ -157,6 +192,13 @@ const DetailDescription = styled.div`
 		width: 50%;
 		float: left;
 		margin-right: 1rem;
+	}
+	@media(max-width: 768px){
+		img{
+			width: 100%;
+			float: none;
+		}
+
 	}
 `
 

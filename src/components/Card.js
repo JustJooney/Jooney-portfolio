@@ -2,6 +2,9 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import CardDetail from './CardDetail';
+import {motion} from 'framer-motion';
+import {fadeUp} from '../animation';
+import {Hide} from '../style';
 
 function Card({data, id}){
 
@@ -16,16 +19,18 @@ function Card({data, id}){
 	return(
 		<>
 			<Link to={`/project/${id}`}>
-				<StyledCard onClick={loadProjectDetail}>
-					<img src={data.img} alt={data.name} />
-				</StyledCard>
+				<Hide>
+					<StyledCard  variants={fadeUp} onClick={loadProjectDetail}>
+						<motion.img src={data.img} alt={data.name} />
+					</StyledCard>
+				</Hide>
 			</Link>
 			<CardDetail data={data} isClick={isClick} setIsClick={setIsClick} />
 		</>
 	)
 }
 
-const StyledCard = styled.div`
+const StyledCard = styled(motion.div)`
 	position: relative;
 	margin: 1rem 1rem;
 	width: 20rem;
@@ -41,6 +46,9 @@ const StyledCard = styled.div`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;	
+	}
+	@media(max-width: 768px){
+		filter: brightness(100%);
 	}
 `
 

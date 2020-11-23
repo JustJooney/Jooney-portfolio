@@ -1,20 +1,29 @@
 import styled from 'styled-components';
 import headingBG from '../img/headingBG.svg';
+import {motion} from 'framer-motion';
+import {fadeUp} from '../animation';
+import {Hide} from '../style';
+import {useScroll} from './useScroll';
 
 function Header(){
+
+	const [element, controls] = useScroll();
+
 	return(
 		<>
-			<StyledHeader id="home">
-				<h1>Joon Kang</h1>
-				<h2>Front End Developer</h2>
+			<StyledHeader id="home" ref={element} initial={controls} animate={controls}>
+				<Hide>
+					<motion.h1 variants={fadeUp}>Joon Kang</motion.h1>
+				</Hide>
+				<Hide>	
+					<motion.h2  variants={fadeUp}>Front End Developer</motion.h2>
+				</Hide>
 			</StyledHeader>
 		</>
 	);
 }
 
-
-
-const StyledHeader = styled.div`
+const StyledHeader = styled(motion.div)`
 	background-image: url(${headingBG});
 	background-position: center;
 	background-repeat: no-repeat;
@@ -32,7 +41,14 @@ const StyledHeader = styled.div`
 	h1{
 		color: #f76d6d;
 	}
-	
+	@media(max-width: 1024px){
+		width: 100%;
+	}
+	@media(max-width: 320px){
+		h2{
+			text-align: center;
+		}
+	}
 `
 
 export default Header;
