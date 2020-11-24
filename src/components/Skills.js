@@ -37,7 +37,7 @@ function Skills(){
 				<motion.section variants={fadeUp}>
 					<FontAwesomeIcon className='icon' id='friend' icon={faUserFriends} size="5x"/>
 					<div/>
-					<p>Comfortable working with a Team</p>
+					<p>Thrives in a team enviroment</p>
 				</motion.section>
 			</Hide>
 		</StyledSkills>

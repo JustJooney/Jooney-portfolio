@@ -4,9 +4,10 @@ import {Route} from 'react-router-dom';
 
 
 function App() {
+
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <Route path={['/project/:id', '/']}>
         <Home />
       </Route>

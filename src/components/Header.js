@@ -3,20 +3,17 @@ import headingBG from '../img/headingBG.svg';
 import {motion} from 'framer-motion';
 import {fadeUp} from '../animation';
 import {Hide} from '../style';
-import {useScroll} from './useScroll';
 
 function Header(){
 
-	const [element, controls] = useScroll();
-
 	return(
 		<>
-			<StyledHeader id="home" ref={element} initial={controls} animate={controls}>
+			<StyledHeader id="home">
 				<Hide>
-					<motion.h1 variants={fadeUp}>Joon Kang</motion.h1>
+					<motion.h1 variants={fadeUp} initial='hidden' animate='show'>Joon Kang</motion.h1>
 				</Hide>
 				<Hide>	
-					<motion.h2  variants={fadeUp}>Front End Developer</motion.h2>
+					<motion.h2  variants={fadeUp} initial='hidden' animate='show'>Front End Developer</motion.h2>
 				</Hide>
 			</StyledHeader>
 		</>

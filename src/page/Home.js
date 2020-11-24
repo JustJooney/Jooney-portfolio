@@ -3,8 +3,8 @@ import Header from '../components/Header';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Project from '../components/Project';
-import {motion} from 'framer-motion';
-import {pageAnim} from '../animation';
+import ScrollTop from '../components/ScrollTop';
+
 
 function Home(){
 
